@@ -10,27 +10,29 @@
     <section id="word-section">
     </section>
     <section id="submit-section">
+      <form action="" method="get" class="submit-form">
       <div class="div-input">
-        <h2>Kanji</h2>
-      <input id="kanji-value" type="text" placeholder="kanji">
+        <label>Kanji*</label>
+      <input name="kanji" id="kanji-value" type="text" placeholder="kanji" required>
       </div>
       <div class="div-input">
-        <h2>Hiragana</h2>
-      <input id="hiragana-value" type="text" placeholder="hiragana">
+        <label>Hiragana</label>
+      <input name="hiragana" id="hiragana-value" type="text" placeholder="hiragana">
       </div>
       <div class="div-input">
-      <h2>Katakana</h2>
-      <input id="katakana-value" type="text" placeholder="katakana">
+      <label>Katakana</label>
+      <input name="katakana" id="katakana-value" type="text" placeholder="katakana">
       </div>
       <div class="div-input">
-      <h2>Romanji</h2>
-      <input id="romanji-value" type="text" placeholder="romanji">
+      <label>Romanji*</label>
+      <input name="romanji" id="romanji-value" type="text" placeholder="romanji" required>
       </div>
       <div class="div-input">
-      <h2>Traduction</h2>
-      <input id="traduction-value" type="text" placeholder="traduction">
+      <label>Traduction*</label>
+      <input name="traduction" id="traduction-value" type="text" placeholder="traduction" required>
       </div>
-      <button id="kanji-submit">Ajouter</button>
+      <input type="submit" value="Ajouter" id="kanji-submit">
+      </form>
     </section>
    
   </body>

@@ -83,9 +83,16 @@ body{
   justify-content: center;
 }
 
+.submit-form{
+    width:100%;
+    display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .div-input{
   font-size:16px;
-  width:50%;
+  width:90%;
   padding:0.5rem;
   display:flex;
   flex-direction:column;
@@ -99,7 +106,7 @@ body{
   border-radius: 0.3rem;
 }
 
-#submit-section button{
+#kanji-submit{
   width:fit-content;
   padding:0.5rem 1rem;
   border-radius: 0.5rem;
@@ -111,7 +118,7 @@ body{
   transition:transform 0.5s ease-in-out;
 }
 
-#submit-section button:hover{
+#kanji-submit:hover{
   transform:scale(1.05) translateY(-5px);
 
 }

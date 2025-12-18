@@ -84,7 +84,38 @@ flashcards.forEach((card) =>
   }
 }
 
-submitButton.addEventListener("click", () => {
+let form = document.querySelector(".submit-form");
+let submitter = document.querySelector("#kanji-submit");
+
+
+form.addEventListener("submit", (e) => {
+const formData = new FormData(form);
+e.preventDefault();
+for (const [key, value] of formData) {
+  console.log("»", key, value);
+}
+
+new Word();
+})
+
+class Word {
+  constructor() {
+    this.initSupabase();
+    this.updateData();
+  }
+
+  initSupabase() {
+    this.supabase = createClient(supabaseUrl, supabaseKey);
+  }
+  
+  async updateData()
+  {
+  const { error } = await this.supabase
+    .from("kanji")
+    .insert({ id: 9, kanji: "友", katakana : null, hiragana: 'とも', romanji : 'tomo' , traduction:'Ami', profil_id:1, grammatical_class: 'nom'});
+  }
+}
+/* submitButton.addEventListener("click", () => {
   let kanjiValue = document.getElementById('kanji-value').value ;
   let hiraganaValue = document.getElementById('hiragana-value').value;
   let katakanaValue = document.getElementById('katakana-value').value;
@@ -92,6 +123,8 @@ submitButton.addEventListener("click", () => {
   let traductionValue = document.getElementById('traduction-value').value;
 
   console.log(kanjiValue,hiraganaValue,katakanaValue,romanjiValue,traductionValue)
-})
+
+  (9,'友',NULL,'とも','tomo','Ami','Anaelle','nom'),
+}) */
 new Home();
 
