@@ -6,12 +6,11 @@ const supabaseKey = import.meta.env.VITE_SECRET_KEY;
 
 let wordSection;
 let submitSection;
-let submitButton;
+let submitButton = document.querySelector("#kanji-submit");
 
 window.addEventListener("DOMContentLoaded", () => {
   wordSection = document.querySelector("#word-section");
   submitSection = document.querySelector("#submit-section");
-  submitButton = document.querySelector("#kanji-submit");
 })
 
 class Home{
@@ -34,7 +33,6 @@ async initWord()
 {
   let words = await this.getData(Promise.resolve);
   words.forEach((element) => {
-
   let japWord;
   if(element.katakana == null){
     japWord = element.hiragana;
@@ -42,22 +40,7 @@ async initWord()
   else{
     japWord = element.katakana;
   }
-
-  let card = `
-  <div class="flip-card">
-  <div class="flip-card-inner">
-  <div class="flip-card-front">
-  <h1>${element.kanji}</h1>
-  </div>
-  <div class="flip-card-back">
-   <h1>${element.kanji}</h1>
-   <p>${japWord}</p>
-   <p>${element.traduction}</p>
-  </div>
-  </div>
-  </div>
-  `
-    wordSection.innerHTML += card;
+    wordSection.innerHTML += this.initSingleCard(element.kanji, japWord, element.traduction);
   })
     
 let flashcards = document.querySelectorAll(".flip-card");
@@ -101,4 +84,14 @@ flashcards.forEach((card) =>
   }
 }
 
+submitButton.addEventListener("click", () => {
+  let kanjiValue = document.getElementById('kanji-value').value ;
+  let hiraganaValue = document.getElementById('hiragana-value').value;
+  let katakanaValue = document.getElementById('katakana-value').value;
+  let romanjiValue = document.getElementById('romanji-value').value;
+  let traductionValue = document.getElementById('traduction-value').value;
+
+  console.log(kanjiValue,hiraganaValue,katakanaValue,romanjiValue,traductionValue)
+})
 new Home();
+
