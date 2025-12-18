@@ -1,12 +1,104 @@
 import './style.css'
 import { createClient } from '@supabase/supabase-js'
 
-class Home {
+const supabaseUrl = 'https://flwtxxzmabehcaktnkme.supabase.co';
+const supabaseKey = import.meta.env.VITE_SECRET_KEY;
+
+let wordSection;
+let submitSection;
+let submitButton;
+
+window.addEventListener("DOMContentLoaded", () => {
+  wordSection = document.querySelector("#word-section");
+  submitSection = document.querySelector("#submit-section");
+  submitButton = document.querySelector("#kanji-submit");
+})
+
+class Home{
   constructor(){
-     this.initSupabase()
+     this.initSupabase();
+     this.getData();
+     this.initWord();
   }
 
 initSupabase(){
-  this.supabase = createClient('https://flwtxxzmabehcaktnkme.supabase.co',process.env.SUPABASE_KEY);
+  this.supabase = createClient(supabaseUrl, supabaseKey);
 }
+
+async getData(){
+  const { data,error }= await this.supabase.from('kanji').select();
+  return data ;
 }
+
+async initWord()
+{
+  let words = await this.getData(Promise.resolve);
+  words.forEach((element) => {
+
+  let japWord;
+  if(element.katakana == null){
+    japWord = element.hiragana;
+  }
+  else{
+    japWord = element.katakana;
+  }
+
+  let card = `
+  <div class="flip-card">
+  <div class="flip-card-inner">
+  <div class="flip-card-front">
+  <h1>${element.kanji}</h1>
+  </div>
+  <div class="flip-card-back">
+   <h1>${element.kanji}</h1>
+   <p>${japWord}</p>
+   <p>${element.traduction}</p>
+  </div>
+  </div>
+  </div>
+  `
+    wordSection.innerHTML += card;
+  })
+    
+let flashcards = document.querySelectorAll(".flip-card");
+
+flashcards.forEach((card) =>
+{
+
+  let isCardActive = false;
+
+  card.addEventListener("click",() => {
+    if(!isCardActive){
+    card.classList.add("active");
+    isCardActive = true;
+    }
+    else{
+     card.classList.remove("active");
+    isCardActive = false;
+    }
+    
+  })}
+) 
+  }
+
+  initSingleCard(word,character,trad){
+  let singleCard =
+   `
+  <div class="flip-card">
+  <div class="flip-card-inner">
+  <div class="flip-card-front">
+  <h1>${word}</h1>
+  </div>
+  <div class="flip-card-back">
+   <h1>${word}</h1>
+   <p>${character}</p>
+   <p>${trad}</p>
+  </div>
+  </div>
+  </div>
+  `
+  return singleCard;
+  }
+}
+
+new Home();
