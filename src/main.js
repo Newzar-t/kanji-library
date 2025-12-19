@@ -9,13 +9,13 @@ let submitSection;
 let buttonSection;
 let updateForm;
 let buttonUpdateForm;
-let blurDiv = document.querySelector("#blur-div");
+let popUpUpdateForm = document.querySelector(".modal-form")
 
   wordSection = document.querySelector("#word-section");
   submitSection = document.querySelector("#submit-section");
   buttonSection = document.querySelector("#submit-section-hidder");
   updateForm = document.querySelector("#update-form");
-  buttonUpdateForm = document.querySelector("#update-form button");
+  buttonUpdateForm = document.querySelector("#close-form-button");
 
 
 buttonSection.addEventListener("click",() => {
@@ -24,7 +24,7 @@ buttonSection.addEventListener("click",() => {
 })
 
 buttonUpdateForm.addEventListener("click", () => {
-  updateForm.classList.toggle("displaying");
+  popUpUpdateForm.classList.toggle("displaying");
 })
 
 function initSingleCard(word, character, trad) {
@@ -116,25 +116,49 @@ class Home {
   }
 
   changeValue(){
-    
     let updateButtons = document.querySelectorAll(".update-input");
 
     updateButtons = Array.from(updateButtons);
-
+    
+    let rowToChange;
     updateButtons.forEach((button) => {
      button.addEventListener("click", async () => {
     
-    updateForm.classList.toggle("displaying");
-
-/*       let linkWord = button.getAttribute("data-table");
-      const { error } = await this.supabase
-  .from('kanji')
-  .update({ kanji: 'Suicideeeee'})
-  .eq('kanji', linkWord) */
-     
+    popUpUpdateForm.classList.toggle("displaying");
+    rowToChange = button.getAttribute("data-table");
      })
     })
-  
+
+/*           const { error } = await this.supabase
+  .from('kanji')
+  .update({ kanji: 'Suicideeeee'})
+  .eq('kanji', linkWord)  */
+
+  let newValues = [];
+
+    updateForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const newData = new FormData(updateForm);
+        for(const [key, value] of newData){
+          newValues.push(value)
+        }
+
+const { error } = await this.supabase
+    .from("kanji")
+    .update({
+      kanji: newValues[0],
+      katakana: newValues[2],
+      hiragana: newValues[1],
+      romanji: newValues[3],
+      traduction: newValues[4],
+      grammatical_class: newValues[5],
+    })
+    .eq("kanji", rowToChange);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+    })
   }
 }
 
@@ -153,15 +177,12 @@ class Word {
 
   updateValue() {
     form.addEventListener("submit", async (e) => {
-      let i = 0;
       e.preventDefault();
       const formData = new FormData(form);
 
       let instanceValue = [];
 
       for (const [key, value] of formData) {
-        i = i + 1;
-        console.log(i, key, value);
         instanceValue.push(value);
       }
 
