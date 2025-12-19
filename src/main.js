@@ -25,9 +25,6 @@ buttonSection.addEventListener("click",() => {
 
 buttonUpdateForm.addEventListener("click", () => {
   updateForm.classList.toggle("displaying");
-  if(updateForm.classList.contains("displaying")){
-    blurDiv.style.display = "flex";
-  }
 })
 
 function initSingleCard(word, character, trad) {
