@@ -7,33 +7,73 @@
     <title>kanji_library</title>
   </head>
   <body>
+
+    <section id="blur-div">
+      
+    </section>
     <section id="word-section">
     </section>
+
+      <button id="submit-section-hidder"><img src="./public/plus-circle-svgrepo-com.svg" /></button>
     <section id="submit-section">
+
       <form action="" method="get" class="submit-form">
       <div class="div-input">
         <label>Kanji*</label>
-      <input name="kanji" id="kanji-value" type="text" placeholder="kanji" required>
+      <input name="kanji" placeholder="kanji" required>
       </div>
       <div class="div-input">
         <label>Hiragana</label>
-      <input name="hiragana" id="hiragana-value" type="text" placeholder="hiragana">
+      <input name="hiragana" type="text" placeholder="hiragana">
       </div>
       <div class="div-input">
       <label>Katakana</label>
-      <input name="katakana" id="katakana-value" type="text" placeholder="katakana">
+      <input name="katakana"  type="text" placeholder="katakana">
       </div>
       <div class="div-input">
       <label>Romanji*</label>
-      <input name="romanji" id="romanji-value" type="text" placeholder="romanji" required>
+      <input name="romanji"  type="text" placeholder="romanji" required>
       </div>
       <div class="div-input">
       <label>Traduction*</label>
-      <input name="traduction" id="traduction-value" type="text" placeholder="traduction" required>
+      <input name="traduction" type="text" placeholder="traduction" required>
+      </div>
+      <div class="div-input">
+      <label>Classe grammaticale</label>
+      <input name="grammatical_class" type="text" placeholder="Classe grammaticale">
       </div>
       <input type="submit" value="Ajouter" id="kanji-submit">
       </form>
     </section>
+
+    <form id="update-form" action="" method="get">
+      <button>Annuler</button>
+        <div class="div-input">
+        <label>Kanji*</label>
+      <input name="kanji" placeholder="kanji" required>
+      </div>
+      <div class="div-input">
+        <label>Hiragana</label>
+      <input name="hiragana" type="text" placeholder="hiragana">
+      </div>
+      <div class="div-input">
+      <label>Katakana</label>
+      <input name="katakana"  type="text" placeholder="katakana">
+      </div>
+      <div class="div-input">
+      <label>Romanji*</label>
+      <input name="romanji"  type="text" placeholder="romanji" required>
+      </div>
+      <div class="div-input">
+      <label>Traduction*</label>
+      <input name="traduction" type="text" placeholder="traduction" required>
+      </div>
+      <div class="div-input">
+      <label>Classe grammaticale</label>
+      <input name="grammatical_class" type="text" placeholder="Classe grammaticale">
+      </div>
+      <input type="submit" value="Ajouter" id="update-submit">
+    </form>
    
   </body>
       <script type='module' src="/src/main.js"></script>
